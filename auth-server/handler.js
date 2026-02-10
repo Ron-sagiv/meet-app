@@ -73,7 +73,7 @@ module.exports.getAccessToken = async (event) => {
 };
 //==================3rd function getCalendarEvents==============
 module.exports.getCalendarEvents = async (event) => {
-  const access_token = decodeURIComponent(`${event.pathParameters.code}`);
+  const access_token = decodeURIComponent(event.pathParameters.access_token);
 
   oAuth2Client.setCredentials({ access_token });
 
