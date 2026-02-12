@@ -1,5 +1,5 @@
 // src/components/EventList.jsx
-import React from 'react';
+import PropTypes from 'prop-types';
 import Event from './Event';
 
 const EventList = ({ events }) => {
@@ -10,6 +10,10 @@ const EventList = ({ events }) => {
         : null}
     </ul>
   );
+};
+
+EventList.propTypes = {
+  events: PropTypes.array.isRequired,
 };
 
 export default EventList;
