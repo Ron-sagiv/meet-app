@@ -83,7 +83,7 @@ describe('<CitySearch /> component', () => {
   });
 });
 
-//======Integration test=========================
+//======Integration test=======================
 
 describe('<CitySearch /> integration', () => {
   test('renders suggestions list when the app is rendered', async () => {
