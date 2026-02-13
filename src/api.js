@@ -17,7 +17,7 @@ export const extractLocations = (events) => {
 };
 /**
  *
- * This function will fetch the list of all events
+ * This function will fetch the list of all events.
  */
 const checkToken = async (accessToken) => {
   const response = await fetch(
