@@ -18,7 +18,7 @@ const Event = ({ event }) => {
       </button>
 
       {showDetails && (
-        <div data-testid="event-details">
+        <div className="details-btn" data-testid="event-details">
           <h3>About Event</h3>
           <p>{event.description}</p>
           <a href={event.htmlLink} target="_blank" rel="noreferrer">
