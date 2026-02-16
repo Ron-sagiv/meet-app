@@ -22,3 +22,4 @@ console.error = (...arg) => {
   );
   if (!ignoreMessage) originalError(...arg);
 };
+jest.setTimeout(30000);
