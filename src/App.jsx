@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import CitySearch from './components/CitySearch';
 import EventList from './components/EventList';
-import mockData from './mock-data';
+
 import { extractLocations } from './api';
 import NumberOfEvents from './components/NumberOfEvents';
 import { getEvents } from './api';
@@ -17,7 +17,7 @@ const App = () => {
 
   useEffect(() => {
     fetchData();
-  }, [currentCity]);
+  }, [currentCity, currentNOE]);
 
   const fetchData = async () => {
     const allEvents = await getEvents();
@@ -28,15 +28,6 @@ const App = () => {
     setEvents(filteredEvents.slice(0, currentNOE));
     setAllLocations(extractLocations(allEvents));
   };
-  useEffect(() => {
-    const filteredEvents =
-      currentCity === 'See all cities'
-        ? mockData
-        : mockData.filter((event) => event.location === currentCity);
-
-    setEvents((filteredEvents || []).slice(0, currentNOE));
-    setAllLocations(extractLocations(mockData));
-  }, [currentCity, currentNOE]);
 
   return (
     <div className="App">
