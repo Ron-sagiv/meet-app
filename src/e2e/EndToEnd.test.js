@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 
+// jest.setTimeout(30000);
 describe('show/hide event details', () => {
   let browser;
   let page;
