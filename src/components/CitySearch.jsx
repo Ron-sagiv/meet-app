@@ -1,15 +1,31 @@
 // src/components/CitySearch.jsx
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const CitySearch = ({ allLocations, setCurrentCity }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const wrapperRef = useRef(null); // reference to component
 
   useEffect(() => {
     setSuggestions(allLocations);
   }, [`${allLocations}`]);
+
+  // 👇 Detect clicks outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleInputChanged = (event) => {
     const value = event.target.value;
@@ -30,7 +46,7 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
   };
 
   return (
-    <div id="city-search">
+    <div id="city-search" ref={wrapperRef}>
       <input
         type="text"
         className="city"
