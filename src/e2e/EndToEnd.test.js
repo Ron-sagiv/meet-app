@@ -1,18 +1,14 @@
-/**
- * @jest-environment node
- */
-// src/__tests__/EndToEnd.test.js
-
 import puppeteer from 'puppeteer';
 
 describe('show/hide event details', () => {
   let browser;
   let page;
+
   beforeAll(async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
     await page.goto('http://localhost:5173/');
-    await page.waitForSelector('.event');
+    await page.waitForSelector('.event', { timeout: 5000 });
   });
 
   afterAll(() => {
@@ -20,18 +16,19 @@ describe('show/hide event details', () => {
   });
 
   test('An event element is collapsed by default', async () => {
-    const eventDetails = await page.$('.event .details');
+    const eventDetails = await page.$('.event .details-btn');
     expect(eventDetails).toBeNull();
   });
 
   test('User can expand an event to see details', async () => {
-    await page.click('.event .details-btn');
-    const eventDetails = await page.$('.event .details');
+    await page.click('.event .details-button');
+    const eventDetails = await page.$('.event .details-btn');
     expect(eventDetails).toBeDefined();
   });
+
   test('User can collapse an event to hide details', async () => {
-    await page.click('.event .details-btn');
-    const eventDetails = await page.$('.event .details');
+    await page.click('.event .details-button');
+    const eventDetails = await page.$('.event .details-btn');
     expect(eventDetails).toBeNull();
   });
 });
