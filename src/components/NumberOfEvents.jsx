@@ -1,11 +1,16 @@
 // src/components/NumberOfEvents.jsx
 import PropTypes from 'prop-types';
 
-const NumberOfEvents = ({ currentNOE, setCurrentNOE }) => {
+const NumberOfEvents = ({ currentNOE, setCurrentNOE, setErrorAlert }) => {
   const handleInputChanged = (event) => {
     const value = Number(event.target.value);
 
     setCurrentNOE(value);
+    if (isNaN(value) || value <= 0 || value > 50) {
+      setErrorAlert('You must enter a valid number of events');
+    } else {
+      setErrorAlert('');
+    }
   };
 
   return (
@@ -23,6 +28,7 @@ const NumberOfEvents = ({ currentNOE, setCurrentNOE }) => {
 NumberOfEvents.propTypes = {
   currentNOE: PropTypes.number.isRequired,
   setCurrentNOE: PropTypes.func.isRequired,
+  // setErrorAlert: PropTypes.func.isRequired,
 };
 
 export default NumberOfEvents;
